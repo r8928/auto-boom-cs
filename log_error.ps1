@@ -61,13 +61,13 @@ function log_error_email ($le_errorString, $isSuccesss) {
 
   $postParams = @{
     secret    = $secret_key;
+    subject   = $heading
     heading   = $heading
     body_text = $errorString2
-    bcc        = $paths.email_sendto
+    to        = $paths.email_sendto
   }
 
   $header = @{
-    "Accept"       = "application/json"
     "Content-Type" = "application/json"
   }
 

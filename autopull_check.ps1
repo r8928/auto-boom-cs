@@ -94,12 +94,7 @@ function autopull_check () {
 
   try {
 
-    $void = checkFile $paths.dcs_folder "DAILY-STATEMENT*.csv"
-    $void = checkFile $paths.dcs_folder "DAILY-ACCESSORY*.csv"
-    $void = checkFile $paths.dcs_folder "DAILY-PB*.csv"
-    $void = checkFile $paths.boomsbi_folder "*Accessory_BOOMSBI.csv"
-    $void = checkFile $paths.boomsbi_folder "*Service_BOOMSBI.csv"
-    $void = checkFile $paths.sort_folder "Dealer Sort*.xlsx"
+    $void = checkFile $paths.ranker_folder "AT&T MyResults -*.xlsx"
 
     if ($null -eq $Global:RB_errors -or $Global:RB_errors.Length -eq 0) {
       # Write-Host "All good"

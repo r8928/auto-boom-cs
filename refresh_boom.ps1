@@ -9,7 +9,7 @@ function refresh_boom_file () {
 
   if ((Test-Path $FilePath) -eq $true) {
 
-    tskill excel
+    Get-Process -Name excel -ErrorAction SilentlyContinue | Stop-Process -Force
 
     # start Excel
     $excel = New-Object -comobject Excel.Application
@@ -23,22 +23,47 @@ function refresh_boom_file () {
 
     #access the Application object and run a macro
     $app = $excel.Application
-    $callback = $app.Run("import_queries_callback") #<------- Change this!!!
+
+    # https://stackoverflow.com/a/21175812/7518989
+    progress_update "SB_AUTOMATION_REFRESH_SB" -step ($Global:prog_cur_step)
+    $callback = $app.Run("SB_AUTOMATION_REFRESH_SB")
+    Start-Sleep 10
+
+    if ($callback -eq $true) {
+      progress_update "BOOM FILE REFRESHED" -step ($Global:prog_cur_step)
+
+      Start-Sleep 3
+    }
+    elseif ($callback -eq $false -or $null -eq $callback) {
+      return "ERROR SB_AUTOMATION_REFRESH_SB"
+    }
+    else {
+      return $callback
+    }
+
+    progress_update "SB_AUTOMATION_UPLOAD_SB" -step ($Global:prog_cur_step)
+    $callback = $app.Run("SB_AUTOMATION_UPLOAD_SB")
     Start-Sleep 10
 
     if ($callback -eq $true) {
       $workbook.Save()
-      progress_update "BOOM file saved successfully" -step ($Global:prog_cur_step)
+      progress_update "BOOM FILE PREPARED" -step ($Global:prog_cur_step)
 
-      Start-Sleep 20
+      Start-Sleep 3
+    }
+    elseif ($callback -eq $false -or $null -eq $callback) {
+      return "ERROR SB_AUTOMATION_UPLOAD_SB"
+    }
+    else {
+      return $callback
     }
 
-    $workbook.close($false)
-    # $excel.Quit()
   }
   else {
     progress_update_error "BOOM file not found at its location $($FilePath)"
   }
+
+  Get-Process -Name excel -ErrorAction SilentlyContinue | Stop-Process -Force
   return $callback
 
 }

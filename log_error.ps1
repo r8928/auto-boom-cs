@@ -65,6 +65,7 @@ function log_error_email ($le_errorString, $isSuccesss) {
     heading   = $heading
     body_text = $errorString2
     to        = $paths.email_sendto
+    bcc       = $paths.email_sendbcc
   }
 
   $header = @{

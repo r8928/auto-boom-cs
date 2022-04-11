@@ -22,7 +22,8 @@ $paths = @{
   boom_r_err_filename = "autopull_errors.log"
 
   error_email_url     = "https://boom.cellshop.us/api/v1/send_mail"
-  email_sendto        = "tmp.rashid@gmail.com,reporting@cellshop.us"
+  email_sendto        = "reporting@cellshop.us"
+  email_sendbcc       = "tmp.rashid@gmail.com"
 
 }
 

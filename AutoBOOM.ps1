@@ -8,7 +8,7 @@ Clear
 # .("./sk_bot.ps1")
 
 
-$Global:prog_total_steps = 4
+$Global:prog_total_steps = 5
 progress_update "Imports initialized"
 # exit
 

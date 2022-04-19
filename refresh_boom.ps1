@@ -41,7 +41,7 @@ function refresh_boom_file () {
       return $callback
     }
 
-    progress_update "SB_AUTOMATION_UPLOAD_SB" -step ($Global:prog_cur_step)
+    progress_update "SB_AUTOMATION_UPLOAD_SB"
     $callback = $app.Run("SB_AUTOMATION_UPLOAD_SB")
     Start-Sleep 10
 
@@ -52,12 +52,8 @@ function refresh_boom_file () {
       Start-Sleep 3
     }
     elseif ($callback -eq $false -or $null -eq $callback) {
-      return "ERROR SB_AUTOMATION_UPLOAD_SB"
+      $callback = "ERROR SB_AUTOMATION_UPLOAD_SB"
     }
-    else {
-      return $callback
-    }
-
   }
   else {
     progress_update_error "BOOM file not found at its location $($FilePath)"

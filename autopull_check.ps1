@@ -57,7 +57,7 @@ function checkFile ($Directory, $FilePattern) {
         $RB.file_name = $list[0].Name
 
         $RB.file_timestamp = $list[0].LastWriteTime
-        $RB.file_has_correct_timestamp = $RB.file_timestamp -gt $dt.yesterday
+        $RB.file_has_correct_timestamp = $RB.file_timestamp -gt $dt.file_threshold_time
 
         $RB.file_size = $list[0].Length
         $RB.file_has_correct_size = $RB.file_size -gt ($list[1].Length * 0.9)
@@ -84,7 +84,7 @@ function checkFile ($Directory, $FilePattern) {
   }
 
   if ($RB.file_has_correct_timestamp -eq $false) {
-    $Global:RB_errors += "$($RB.searchString): Last file is older than ($($dt.yesterday))"
+    $Global:RB_errors += "$($RB.searchString): Last file is older than ($($dt.file_threshold_time))"
   }
 
 

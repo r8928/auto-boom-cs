@@ -1,13 +1,12 @@
 $dt = @{
 
   switchOverDay       = 4
-  file_threshold_time = "10:00 AM"
+  file_threshold_time = (Get-Date).Date # start of day today
 
 }
 
 $dt.today = (Get-Date).AddDays(-$dt.switchOverDay)
 $dt.month = ("$($dt.today.Month)/$($dt.today.Year)") -as [DateTime]
-$dt.yesterday = $dt.month.AddMonths(1).AddDays(-$dt.month.Day)
 
 
 $paths = @{
@@ -26,8 +25,3 @@ $paths = @{
   email_sendbcc       = "tmp.rashid@gmail.com"
 
 }
-
-
-
-if ($dt.yesterday -ge (Get-Date)) { $dt.yesterday = (Get-Date).AddDays(-1) }
-$dt.yesterday = ("$($dt.yesterday.ToString("yyyy-MM-dd")) $($dt.file_threshold_time)") -as [DateTime]

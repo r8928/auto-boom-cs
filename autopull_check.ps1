@@ -95,8 +95,8 @@ function autopull_check () {
   try {
 
     $void = checkFile $paths.ranker_folder "AT&T MyResults - Historical Analysis-RANKER_2_LOCATION*.xlsx"
-    $void = checkFile $paths.ranker_folder "AT&T MyResults - Historical Analysis-RANKER_2_RAE*.xlsx"
-    $void = checkFile $paths.ranker_folder "AT&T MyResults - Historical Analysis-RANKER_1_RAE*.xlsx"
+    $void = checkFile $paths.ranker_folder "AT&T MyResults - Historical Analysis-RANKER_2_NATIONAL*.xlsx"
+    $void = checkFile $paths.ranker_folder "AT&T MyResults - Historical Analysis-RANKER_2_NATIONAL*.xlsx"
     $void = checkFile $paths.ranker_folder "AT&T MyResults - Historical Analysis-RANKER_1_LOCATION*.xlsx"
 
     if ($null -eq $Global:RB_errors -or $Global:RB_errors.Length -eq 0) {
